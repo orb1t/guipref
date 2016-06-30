@@ -1,5 +1,5 @@
-Zenos Solutions GUI Preferences Library (ZSGPL)
-===============================================
+Java/Swing GUI Preferences Library
+==================================
 
 This is a small and compact library preferences utility library to (mostly)
 keep preferences for Java/Swing components.  The idea is to provide, as
@@ -38,4 +38,4 @@ public class MyFrame extends com.zensols.gui.pref.ConfigPrefFrame {
 
 License
 -------
-Lesser GPU
+GNU Lesser General Public License, Version 3.0

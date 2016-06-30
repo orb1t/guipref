@@ -41,6 +41,13 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
 	<developerConnection>scm:git:git@github.com:plandes/guipref.git</developerConnection>
     </scm>
 
+    <developers>
+	<developer>
+	    <name>Paul Landes</name>
+            <url>http://github.com/plandes</url>
+	</developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <log4j.version>2.3</log4j.version>
@@ -83,14 +90,6 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
     </dependencies>
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>1.0-beta-7</version>
-            </extension>
-        </extensions>
-
         <plugins>
             <!-- Java compiler plugin -->
             <plugin>
@@ -103,6 +102,7 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
                 </configuration>
             </plugin>
 
+            <!-- attach sources -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -113,6 +113,26 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- sign dists -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
