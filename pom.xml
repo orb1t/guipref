@@ -26,6 +26,9 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
     <artifactId>pref</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
+    <name>GUI Preferences Library</name>
+    <description>Java/Swing GUI Preferences Library</description>
+    <url>https://github.com/plandes/guipref</url>
 
     <licenses>
         <license>
