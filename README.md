@@ -38,4 +38,6 @@ public class MyFrame extends com.zensols.gui.pref.ConfigPrefFrame {
 
 License
 -------
+Copyright © 2016 Paul Landes
+
 GNU Lesser General Public License, Version 3.0
