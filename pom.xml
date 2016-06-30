@@ -41,6 +41,17 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
 	<developerConnection>scm:git:git@github.com:plandes/guipref.git</developerConnection>
     </scm>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <developers>
 	<developer>
 	    <name>Paul Landes</name>
@@ -91,7 +102,7 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
 
     <build>
         <plugins>
-            <!-- Java compiler plugin -->
+            <!-- compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -117,7 +128,22 @@ ZSGPL.  If not, see http://www.gnu.org/licenses/.
                 </executions>
             </plugin>
 
-            <!-- sign dists -->
+            <!-- attach javadocs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- sign artifacts -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
