@@ -40,7 +40,7 @@ Documentation
 -------------
 More [documentation](https://plandes.github.io/guipref/):
 * [Javadoc](https://plandes.github.io/guipref/apidocs/index.html)
-* [Dependencies](https://plandes.github.io/site/dependencies.html)
+* [Dependencies](https://plandes.github.io/guipref/dependencies.html)
 
 License
 -------
