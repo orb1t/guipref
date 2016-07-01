@@ -18,8 +18,22 @@ package com.zensols.gui.pref;
 
 import java.util.prefs.Preferences;
 
+/**
+ * Implementations are receivers of preferences events initiated by {@link
+ * PrefSupport}.
+ *
+ * @author Paul Landes
+ */
 public interface PrefsListener {
+    /**
+     * We're persisting preferences.
+     * @param prefs recipient for the preference updates
+     */
     public void persist(Preferences prefs);
 
+    /**
+     * We're unpersisting preferences.
+     * @param prefs contains the previously persisted preference updates
+     */
     public void unpersist(Preferences prefs);
 }

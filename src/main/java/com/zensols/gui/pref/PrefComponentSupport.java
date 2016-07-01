@@ -26,6 +26,13 @@ import java.util.prefs.Preferences;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * This class takes care of the footwork to synchronize {@link Component}
+ * data with the Java preferences system proxied through a {@link
+ * PrefSupport}.  This data includes the size and lcoation of a window.
+ *
+ * @author Paul Landes
+ */
 public class PrefComponentSupport {
     private static final Log log = LogFactory.getLog(PrefComponentSupport.class);
 
@@ -37,6 +44,13 @@ public class PrefComponentSupport {
     private String sizeWidthProp;
     private String sizeHeightProp;
 
+    /**
+     * Create with the component to sync size/location.
+     *
+     * @param delegate the component with which to proxy prefs
+     * @param prefix a string used as part of the Java preferences namespace to
+     * identify this component
+     */
     public PrefComponentSupport(Component delegate, String prefix) {
         this.delegate = delegate;
         locxProp = prefix + ".loc.x";
@@ -53,13 +67,23 @@ public class PrefComponentSupport {
         this.prefs = prefs;
     }
 
+    /**
+     * Initialize a nascent preferences state for the component.
+     */
     public void initPrefSupport() {
         Point loc = new Point(100, 100);
         Dimension size = new Dimension(700, 900);
         initPrefSupport(loc, size);
     }
 
-    public void initPrefSupport(final Point initLocation, final Dimension initSize) {
+
+    /**
+     * Initialize a nascent preferences state for the component.
+     * @param initLocation the initial location of the component
+     * @param initSize the initial size of the component
+     */
+    public void initPrefSupport(final Point initLocation,
+				final Dimension initSize) {
         if (log.isDebugEnabled()) {
             log.debug("configuring prefs");
         }
@@ -75,8 +99,9 @@ public class PrefComponentSupport {
             }
 
             public void unpersist(Preferences prefs) {
-                Point location = new Point(prefs.getInt(locxProp, initLocation.x),
-                                           prefs.getInt(locyProp, initLocation.y));
+                Point location = new Point(
+		    prefs.getInt(locxProp, initLocation.x),
+		    prefs.getInt(locyProp, initLocation.y));
                 Dimension size = new Dimension(
                     prefs.getInt(sizeWidthProp, initSize.width),
                     prefs.getInt(sizeHeightProp, initSize.height));

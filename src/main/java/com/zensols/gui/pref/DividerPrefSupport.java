@@ -25,6 +25,12 @@ import javax.swing.JSplitPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * Provides preferences support to store/recall divider position in a {@link
+ * JSplitPane}.
+ *
+ * @author Paul Landes
+ */
 public class DividerPrefSupport {
     private static final Log log = LogFactory.getLog(DividerPrefSupport.class);
 

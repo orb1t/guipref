@@ -25,41 +25,86 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * <p>This class interfaces with the Java preferences system and registers
+ * callback for the other framework components in this package.</p>
+ * 
+ * In order, you want to:
+ * <ul>
+ * <li>Construct this object and pass it around to your GUI components.</li>
+ * <li>Each component call {@link #addListener(PrefsListener)}</li>
+ * <li>Call {@link #unpersist} to populate from the Java preferences
+ * system.</li>
+ * <li>Call {@link #setEnabled(boolean)} with <tt>true</tt>.
+ * </ul>
+ *
+ * @author Paul Landes
+ */
 public class PrefSupport {
     private static final Log log = LogFactory.getLog(PrefSupport.class);
 
+    /** Used for init pref load state, which can be tricky. */
     private static final String INIT_KEY = "prefs.init";
+
     private List<PrefsListener> listeners;
     private Preferences prefs;
     private boolean unpersisted;
     private boolean unpersisting;
     private boolean enabled;
 
+    /**
+     * Construct with a class from your application.
+     *
+     * @param packageNode class name is used for the preferences Java
+     * preferences namespace
+     * @see Preferences#userNodeForPackage(Class)
+     */
     public PrefSupport(Class packageNode) {
-        if (log.isDebugEnabled()) log.debug("initializing pref support with pkg node from: " + packageNode);
+        if (log.isDebugEnabled()) {
+	    log.debug("initializing pref support with pkg node from: " +
+		      packageNode);
+	}
         prefs = Preferences.userNodeForPackage(packageNode);
         listeners = new java.util.LinkedList();
         enabled = false;
     }
 
+    /**
+     * Register a call back listener called for preference (load) updates.
+     * @param listener gets invoked with preference persists and unpersists
+     */
     public void addListener(PrefsListener listener) {
         synchronized (listeners) {
             listeners.add(listener);
         }
     }
 
+    /**
+     * @return if we have preferences, which can be important for initial
+     * preference load/setting.
+     */
     public boolean hasPreferences() {
         return prefs.getBoolean(INIT_KEY, false);
     }
 
+    /**
+     * @return if we've unpersisted yet or not, which can be important for
+     * initial preference load/settings.
+     */
     public boolean unpersisted() {
         return unpersisted;
     }
 
+    /** @return the Java system preferences. */
     public Preferences getPreferences() {
 	return prefs;
     }
 
+    /**
+     * Unpersist, which invokes all the callback (observer/listeners).
+     * Note this does nothing if this instance is not enabled.
+     * @see #setEnabled(boolean)
+     */
     public void unpersist() {
         final Runnable r = new Runnable() {
             public void run() {
@@ -96,6 +141,11 @@ public class PrefSupport {
         unpersisted = true;
     }
 
+    /**
+     * Persist the current state of this object to the Java preferences system.
+     * Note this does nothing if the instance isn't enabled.
+     * @see #setEnabled(boolean)
+     */
     public void persist() {
         final Runnable r = new Runnable() {
             public void run() {
@@ -135,12 +185,20 @@ public class PrefSupport {
         }
     }
 
+    /**
+     * @return the enabled state
+     * @see #persist
+     */
     public boolean getEanbled() {
         return enabled;
     }
 
+    /**
+     * Set the enabled state.
+     * @param enabled <tt>true</tt> if the instance is enabled
+     * @see #persist
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }
-

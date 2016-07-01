@@ -21,15 +21,34 @@ import javax.swing.JFrame;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * A frame that takes care of all the preferences logic for you.  This is the
+ * class you want to extend in most cases.
+ *
+ * @author Paul Landes
+ */
 public class PrefFrame extends javax.swing.JFrame {
     private static final Log log = LogFactory.getLog(PrefFrame.class);
 
     protected PrefComponentSupport prefCompSupport;
 
+    /**
+     * Create using this class for the preferences namespace (not
+     * preferrable and better to use the other constructor).
+     *
+     * @param prefix a string used as part of the Java preferences namespace to
+     * identify this frame
+     */
     public PrefFrame(String prefix) {
         prefCompSupport = new PrefComponentSupport(this, prefix);
     }
 
+    /**
+     * Create with a preferences support you already have.
+     *
+     * @param prefCompSupport used for all preferences configuration for this
+     * frame instance
+     */
     public PrefFrame(PrefComponentSupport prefCompSupport) {
         this.prefCompSupport = prefCompSupport;
     }
@@ -42,6 +61,10 @@ public class PrefFrame extends javax.swing.JFrame {
         prefCompSupport.setPrefSupport(prefs);
     }
 
+    /**
+     * Overridable method that inits the pref support.
+     * @see PrefComponentSupport#initPrefSupport
+     */
     protected void initPrefSupport() {
         prefCompSupport.initPrefSupport();       
     }
