@@ -30,8 +30,8 @@ Getting Started
 ```java
 public class MyFrame extends com.zensols.gui.pref.PrefFrame {
     public class MyFrame() {
-	    super("optionConfigFrame");
-	}
+        super("optionConfigFrame");
+    }
 ...
 }
 ```
