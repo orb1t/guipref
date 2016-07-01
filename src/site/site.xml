@@ -7,6 +7,10 @@
     </skin>
 
     <body>
+        <links>
+            <item name="Source" href="https://github.com/plandes/guipref"/>
+        </links>
+
         <menu name="Quick Start">
             <item name="Introduction" href="README.html"/>
             <item name="Javadoc" href="apidocs/index.html"/>
