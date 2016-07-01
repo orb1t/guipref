@@ -16,8 +16,7 @@ Features
 
 Obtaining
 ---------
-In your `pom.xml` file, add:
-
+In your `pom.xml` file add the below or [look here](https://plandes.github.io/guipref/dependency-info.html):
 ```xml
 <dependency>
     <groupId>com.zensols.gui</groupId>
@@ -26,15 +25,22 @@ In your `pom.xml` file, add:
 </dependency>
 ```
 
-
 Getting Started
 ---------------
-
 ```java
-public class MyFrame extends com.zensols.gui.pref.ConfigPrefFrame {
+public class MyFrame extends com.zensols.gui.pref.PrefFrame {
+    public class MyFrame() {
+	    super("optionConfigFrame");
+	}
 ...
 }
 ```
+
+Documentation
+-------------
+More [documentation](https://plandes.github.io/guipref/):
+* [Javadoc](https://plandes.github.io/guipref/apidocs/index.html)
+* [Dependencies](https://plandes.github.io/site/dependencies.html)
 
 License
 -------
