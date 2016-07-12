@@ -8,7 +8,6 @@ frames and other GUI components (i.e. dividers) between runs of an application.
 
 Features
 --------
-
 * Preference support for size and locations of `JFrames`.
 * Preference support for dividers in `JSplitPane`.
 * Registers preferences in your own name space and app to avoid name
